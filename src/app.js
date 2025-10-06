@@ -1,111 +1,155 @@
-import { LitElement, html } from 'lit';
+import { LitElement, html, css } from 'lit';
+import { cssVariables, buttonStyles } from './styles/shared-styles.js';
 import { store } from './store/store.js';
-import { addEmployee, updateEmployee, deleteEmployee } from './store/actions.js';
+import { router } from './router/index.js';
+import { t, setCurrentLanguage, getCurrentLanguage } from './locales/index.js';
 
 class AppRoot extends LitElement {
   static properties = {
-    employees: { type: Array }
+    currentRoute: { type: Object },
+    currentLanguage: { type: String }
   };
+
+  static styles = [
+    cssVariables,
+    buttonStyles,
+    css`
+      :host {
+        display: block;
+        min-height: 100vh;
+        background: var(--color-background);
+      }
+
+      .navbar {
+        background: white;
+        border-bottom: 2px solid var(--color-primary);
+        padding: var(--spacing-md) var(--spacing-lg);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        color: var(--color-text);
+        text-decoration: none;
+      }
+
+      .navbar-brand h1 {
+        margin: 0;
+        font-size: var(--font-size-xl);
+        color: var(--color-primary);
+      }
+
+      .navbar-actions {
+        display: flex;
+        gap: var(--spacing-md);
+        align-items: center;
+      }
+
+      .lang-toggle {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        border: 1px solid var(--color-border);
+        background: white;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        font-size: var(--font-size-sm);
+      }
+
+      .lang-toggle:hover {
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+      }
+
+      .lang-toggle.active {
+        background: var(--color-primary);
+        color: white;
+        border-color: var(--color-primary);
+      }
+
+      .main-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      @media (max-width: 768px) {
+        .navbar {
+          flex-direction: column;
+          gap: var(--spacing-md);
+        }
+
+        .navbar-actions {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    `
+  ];
 
   constructor() {
     super();
-    this.employees = [];
+    this.currentRoute = null;
+    this.currentLanguage = getCurrentLanguage();
+    this.unsubscribeRouter = null;
+  }
 
-    const state = store.getState();
-    this.employees = state.employees;
+  connectedCallback() {
+    super.connectedCallback();
 
-    this.unsubscribe = store.subscribe((state) => {
-      console.log('State changed:', state);
-      this.employees = state.employees;
+    router.init();
+
+    this.unsubscribeRouter = router.subscribe(({ route }) => {
+      this.currentRoute = route;
+    });
+
+    const { route } = router.getCurrentRoute();
+    this.currentRoute = route;
+
+    window.addEventListener('language-changed', (e) => {
+      this.currentLanguage = e.detail.lang;
     });
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    if (this.unsubscribe) {
-      this.unsubscribe();
+    if (this.unsubscribeRouter) {
+      this.unsubscribeRouter();
     }
+    window.removeEventListener('language-changed', () => {});
   }
 
-  _addTestEmployee() {
-    addEmployee({
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john@example.com',
-      phone: '532 123 45 67',
-      dateOfBirth: '1990-01-01',
-      dateOfEmployment: '2020-01-01',
-      department: 'Tech',
-      position: 'Senior'
-    });
-  }
-
-  _addAnotherEmployee() {
-    addEmployee({
-      firstName: 'Jane',
-      lastName: 'Smith',
-      email: 'jane@example.com',
-      phone: '533 234 56 78',
-      dateOfBirth: '1992-05-20',
-      dateOfEmployment: '2021-06-15',
-      department: 'Analytics',
-      position: 'Medior'
-    });
-  }
-
-  _updateFirstEmployee() {
-    if (this.employees.length > 0) {
-      const firstEmployee = this.employees[0];
-      updateEmployee(firstEmployee.id, {
-        position: 'Lead Developer'
-      });
-    }
-  }
-
-  _deleteFirstEmployee() {
-    if (this.employees.length > 0) {
-      const firstEmployee = this.employees[0];
-      deleteEmployee(firstEmployee.id);
-    }
+  _handleLanguageToggle(lang) {
+    setCurrentLanguage(lang);
   }
 
   render() {
     return html`
-      <div style="padding: 20px; font-family: sans-serif;">
-        <h1>AŞAMA 2: Store Test</h1>
-
-        <div style="margin-bottom: 20px;">
-          <h2>Test Butonları</h2>
-          <button @click="${this._addTestEmployee}" style="padding: 10px; margin: 5px;">
-            Add John Doe
+      <div class="navbar">
+        <a href="/" class="navbar-brand" @click="${(e) => {e.preventDefault(); router.navigate('/');}}">
+          <h1>🏢 ${t('app.title')}</h1>
+        </a>
+        <div class="navbar-actions">
+          <button
+            class="lang-toggle ${this.currentLanguage === 'en' ? 'active' : ''}"
+            @click="${() => this._handleLanguageToggle('en')}"
+          >
+            EN
           </button>
-          <button @click="${this._addAnotherEmployee}" style="padding: 10px; margin: 5px;">
-            Add Jane Smith
-          </button>
-          <button @click="${this._updateFirstEmployee}" style="padding: 10px; margin: 5px;">
-            Update First Employee
-          </button>
-          <button @click="${this._deleteFirstEmployee}" style="padding: 10px; margin: 5px;">
-            Delete First Employee
+          <button
+            class="lang-toggle ${this.currentLanguage === 'tr' ? 'active' : ''}"
+            @click="${() => this._handleLanguageToggle('tr')}"
+          >
+            TR
           </button>
         </div>
+      </div>
 
-        <div>
-          <h2>Employees (${this.employees.length})</h2>
-          ${this.employees.length === 0 ? html`
-            <p>No employees yet. Click "Add John Doe" to add one!</p>
-          ` : html`
-            <ul>
-              ${this.employees.map(emp => html`
-                <li>
-                  <strong>${emp.firstName} ${emp.lastName}</strong> -
-                  ${emp.position} at ${emp.department}
-                  (${emp.email})
-                </li>
-              `)}
-            </ul>
-          `}
-        </div>
+      <div class="main-content">
+        ${this.currentRoute ? html`<${this.currentRoute.component}></${this.currentRoute.component}>` : ''}
       </div>
     `;
   }

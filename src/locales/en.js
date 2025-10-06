@@ -1,50 +1,49 @@
 export const en = {
+  app: {
+    title: 'ING Employee Management'
+  },
   nav: {
     employees: 'Employees',
     addNew: 'Add New Employee'
   },
-  employeeList: {
+  list: {
     title: 'Employee List',
-    tableView: 'Table View',
-    listView: 'List View',
     search: 'Search employees...',
-    noResults: 'No employees found',
+    noEmployees: 'No employees found',
+    addNew: 'Add New Employee',
     edit: 'Edit',
-    delete: 'Delete'
+    delete: 'Delete',
+    actions: 'Actions',
+    confirmDelete: 'Delete Employee',
+    confirmDeleteMessage: 'Are you sure you want to delete this employee? This action cannot be undone.'
   },
   form: {
-    addTitle: 'Add New Employee',
-    editTitle: 'Edit Employee',
-    editingEmployee: 'Editing employee:',
+    addEmployee: 'Add New Employee',
+    editEmployee: 'Edit Employee',
+    backToList: 'Back to List',
     firstName: 'First Name',
     lastName: 'Last Name',
     email: 'Email',
     phone: 'Phone',
+    phoneHelper: 'Format: 532 123 45 67',
     dateOfBirth: 'Date of Birth',
     dateOfEmployment: 'Date of Employment',
     department: 'Department',
     position: 'Position',
     selectDepartment: 'Select department',
     selectPosition: 'Select position',
-    submit: 'Save',
+    save: 'Save',
+    update: 'Update',
     cancel: 'Cancel'
   },
   departments: {
-    analytics: 'Analytics',
-    tech: 'Tech'
+    Analytics: 'Analytics',
+    Tech: 'Tech'
   },
   positions: {
-    junior: 'Junior',
-    medior: 'Medior',
-    senior: 'Senior'
-  },
-  confirmations: {
-    deleteTitle: 'Delete Employee',
-    deleteMessage: 'Are you sure you want to delete this employee?',
-    updateTitle: 'Update Employee',
-    updateMessage: 'Are you sure you want to update this employee?',
-    confirm: 'Yes, Confirm',
-    cancel: 'Cancel'
+    Junior: 'Junior',
+    Medior: 'Medior',
+    Senior: 'Senior'
   },
   validation: {
     required: 'This field is required',

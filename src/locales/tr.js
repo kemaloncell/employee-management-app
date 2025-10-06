@@ -1,50 +1,49 @@
 export const tr = {
+  app: {
+    title: 'ING Çalışan Yönetimi'
+  },
   nav: {
     employees: 'Çalışanlar',
     addNew: 'Yeni Çalışan Ekle'
   },
-  employeeList: {
+  list: {
     title: 'Çalışan Listesi',
-    tableView: 'Tablo Görünümü',
-    listView: 'Liste Görünümü',
     search: 'Çalışan ara...',
-    noResults: 'Çalışan bulunamadı',
+    noEmployees: 'Çalışan bulunamadı',
+    addNew: 'Yeni Çalışan Ekle',
     edit: 'Düzenle',
-    delete: 'Sil'
+    delete: 'Sil',
+    actions: 'İşlemler',
+    confirmDelete: 'Çalışanı Sil',
+    confirmDeleteMessage: 'Bu çalışanı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.'
   },
   form: {
-    addTitle: 'Yeni Çalışan Ekle',
-    editTitle: 'Çalışan Düzenle',
-    editingEmployee: 'Düzenlenen çalışan:',
+    addEmployee: 'Yeni Çalışan Ekle',
+    editEmployee: 'Çalışan Düzenle',
+    backToList: 'Listeye Dön',
     firstName: 'Ad',
     lastName: 'Soyad',
     email: 'E-posta',
     phone: 'Telefon',
+    phoneHelper: 'Format: 532 123 45 67',
     dateOfBirth: 'Doğum Tarihi',
     dateOfEmployment: 'İşe Giriş Tarihi',
     department: 'Departman',
     position: 'Pozisyon',
     selectDepartment: 'Departman seçin',
     selectPosition: 'Pozisyon seçin',
-    submit: 'Kaydet',
+    save: 'Kaydet',
+    update: 'Güncelle',
     cancel: 'İptal'
   },
   departments: {
-    analytics: 'Analitik',
-    tech: 'Teknoloji'
+    Analytics: 'Analitik',
+    Tech: 'Teknoloji'
   },
   positions: {
-    junior: 'Junior',
-    medior: 'Medior',
-    senior: 'Senior'
-  },
-  confirmations: {
-    deleteTitle: 'Çalışanı Sil',
-    deleteMessage: 'Bu çalışanı silmek istediğinizden emin misiniz?',
-    updateTitle: 'Çalışanı Güncelle',
-    updateMessage: 'Bu çalışanı güncellemek istediğinizden emin misiniz?',
-    confirm: 'Evet, Onayla',
-    cancel: 'İptal'
+    Junior: 'Junior',
+    Medior: 'Medior',
+    Senior: 'Senior'
   },
   validation: {
     required: 'Bu alan zorunludur',
