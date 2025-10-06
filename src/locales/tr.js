@@ -1,58 +1,100 @@
 export const tr = {
-  app: {
-    title: 'ING Çalışan Yönetimi'
-  },
   nav: {
     employees: 'Çalışanlar',
-    addNew: 'Yeni Çalışan Ekle'
+    addNew: 'Yeni Ekle',
   },
-  list: {
+
+  employeeList: {
     title: 'Çalışan Listesi',
+    tableView: 'Tablo Görünümü',
+    listView: 'Liste Görünümü',
     search: 'Çalışan ara...',
-    noEmployees: 'Çalışan bulunamadı',
-    addNew: 'Yeni Çalışan Ekle',
-    edit: 'Düzenle',
-    delete: 'Sil',
-    actions: 'İşlemler',
-    confirmDelete: 'Çalışanı Sil',
-    confirmDeleteMessage: 'Bu çalışanı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.'
+    noResults: 'Çalışan bulunamadı',
+    noEmployees: 'Henüz çalışan yok. İlk çalışanınızı ekleyin!',
   },
-  form: {
-    addEmployee: 'Yeni Çalışan Ekle',
-    editEmployee: 'Çalışan Düzenle',
-    backToList: 'Listeye Dön',
+
+  table: {
+    select: 'Seç',
     firstName: 'Ad',
     lastName: 'Soyad',
-    email: 'E-posta',
-    phone: 'Telefon',
-    phoneHelper: 'Format: 532 123 45 67',
-    dateOfBirth: 'Doğum Tarihi',
     dateOfEmployment: 'İşe Giriş Tarihi',
+    dateOfBirth: 'Doğum Tarihi',
+    phone: 'Telefon',
+    email: 'E-posta',
     department: 'Departman',
     position: 'Pozisyon',
-    selectDepartment: 'Departman seçin',
-    selectPosition: 'Pozisyon seçin',
-    save: 'Kaydet',
-    update: 'Güncelle',
-    cancel: 'İptal'
+    actions: 'İşlemler',
   },
+
+  form: {
+    addTitle: 'Yeni Çalışan Ekle',
+    editTitle: 'Çalışan Düzenle',
+    editingEmployee: 'Düzenlediğiniz çalışan',
+    firstName: 'Ad',
+    lastName: 'Soyad',
+    dateOfEmployment: 'İşe Giriş Tarihi',
+    dateOfBirth: 'Doğum Tarihi',
+    phone: 'Telefon Numarası',
+    email: 'E-posta Adresi',
+    department: 'Departman',
+    position: 'Pozisyon',
+    submit: 'Kaydet',
+    cancel: 'İptal',
+    selectDepartment: 'Departman Seçin',
+    selectPosition: 'Pozisyon Seçin',
+  },
+
   departments: {
-    Analytics: 'Analitik',
-    Tech: 'Teknoloji'
+    analytics: 'Analitik',
+    tech: 'Teknoloji',
   },
+
   positions: {
-    Junior: 'Junior',
-    Medior: 'Medior',
-    Senior: 'Senior'
+    junior: 'Junior',
+    medior: 'Medior',
+    senior: 'Senior',
   },
+
+  actions: {
+    edit: 'Düzenle',
+    delete: 'Sil',
+    save: 'Kaydet',
+    cancel: 'İptal',
+    confirm: 'Onayla',
+  },
+
+  confirmations: {
+    deleteTitle: 'Emin misiniz?',
+    deleteMessage: '{name} çalışanının kaydı silinecek',
+    updateTitle: 'Emin misiniz?',
+    updateMessage: 'Bu çalışan kaydını güncellemek istiyor musunuz?',
+    proceed: 'Devam Et',
+    cancel: 'İptal',
+  },
+
   validation: {
     required: 'Bu alan zorunludur',
     email: 'Geçerli bir e-posta adresi girin',
-    emailUnique: 'Bu e-posta zaten kullanılıyor',
-    phone: 'Telefon formatı: 532 123 45 67',
+    phone: 'Geçerli bir telefon numarası girin (örn: 532 123 45 67)',
     date: 'Geçerli bir tarih girin',
+    unique: 'Bu {field} zaten mevcut',
     dateOfBirthFuture: 'Doğum tarihi gelecekte olamaz',
     dateOfBirthAge: 'Çalışan en az 18 yaşında olmalıdır',
-    dateOfEmploymentFuture: 'İşe giriş tarihi gelecekte olamaz'
-  }
+    dateOfEmploymentFuture: 'İşe giriş tarihi gelecekte olamaz',
+  },
+
+  pagination: {
+    page: 'Sayfa',
+    of: '/',
+    showing: 'Gösteriliyor',
+    to: '-',
+    totalRecords: 'toplam kayıt',
+  },
+
+  messages: {
+    employeeAdded: 'Çalışan başarıyla eklendi',
+    employeeUpdated: 'Çalışan başarıyla güncellendi',
+    employeeDeleted: 'Çalışan başarıyla silindi',
+    error: 'Bir hata oluştu',
+  },
 };

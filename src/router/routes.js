@@ -1,41 +1,31 @@
 export const routes = [
   {
     path: '/',
-    component: 'employee-list',
-    name: 'list',
-    load: () => import('../pages/employee-list.js')
+    redirect: '/employees',
   },
   {
-    path: '/add',
-    component: 'employee-form',
-    name: 'add',
-    load: () => import('../pages/employee-form.js')
+    path: '/employees',
+    component: 'employee-list-page',
+    action: async () => {
+      await import('../pages/employee-list-page.js');
+    },
   },
   {
-    path: '/edit/:id',
-    component: 'employee-form',
-    name: 'edit',
-    load: () => import('../pages/employee-form.js')
-  }
+    path: '/employees/add',
+    component: 'employee-form-page',
+    action: async () => {
+      await import('../pages/employee-form-page.js');
+    },
+  },
+  {
+    path: '/employees/edit/:id',
+    component: 'employee-form-page',
+    action: async () => {
+      await import('../pages/employee-form-page.js');
+    },
+  },
+  {
+    path: '(.*)',
+    redirect: '/employees',
+  },
 ];
-
-export function matchRoute(path) {
-  for (const route of routes) {
-    const pattern = route.path.replace(/:[^/]+/g, '([^/]+)');
-    const regex = new RegExp(`^${pattern}$`);
-    const match = path.match(regex);
-
-    if (match) {
-      const params = {};
-      const paramNames = route.path.match(/:[^/]+/g) || [];
-
-      paramNames.forEach((param, index) => {
-        params[param.slice(1)] = match[index + 1];
-      });
-
-      return { route, params };
-    }
-  }
-
-  return null;
-}

@@ -1,53 +1,61 @@
 import { store } from './store.js';
 
-export function addEmployee(employeeData) {
+
+export function addEmployee(employee) {
   const state = store.getState();
 
+  const newId = state.employees.length > 0
+    ? Math.max(...state.employees.map(e => e.id)) + 1
+    : 1;
+
   const newEmployee = {
-    id: Date.now(),
-    ...employeeData
+    id: newId,
+    ...employee,
+    createdAt: new Date().toISOString(),
   };
 
   store.setState({
-    employees: [...state.employees, newEmployee]
+    employees: [...state.employees, newEmployee],
   });
+
+  return newEmployee;
 }
 
-export function updateEmployee(id, updatedData) {
+export function updateEmployee(id, updates) {
   const state = store.getState();
 
-  const employees = state.employees.map(emp =>
-    emp.id === id ? { ...emp, ...updatedData } : emp
+  const updatedEmployees = state.employees.map(employee =>
+    employee.id === id
+      ? { ...employee, ...updates, updatedAt: new Date().toISOString() }
+      : employee
   );
 
-  store.setState({ employees });
+  store.setState({
+    employees: updatedEmployees,
+  });
 }
 
 export function deleteEmployee(id) {
   const state = store.getState();
-  const employees = state.employees.filter(emp => emp.id !== id);
-  store.setState({ employees });
+
+  const filteredEmployees = state.employees.filter(
+    employee => employee.id !== id
+  );
+
+  store.setState({
+    employees: filteredEmployees,
+  });
 }
 
 export function getEmployeeById(id) {
   const state = store.getState();
-  return state.employees.find(emp => emp.id === id);
+  return state.employees.find(employee => employee.id === id);
 }
 
 export function setViewMode(mode) {
-  if (mode !== 'table' && mode !== 'list') {
-    console.warn('Invalid view mode:', mode);
-    return;
-  }
-
   store.setState({ viewMode: mode });
 }
 
 export function setLanguage(lang) {
-  if (lang !== 'en' && lang !== 'tr') {
-    console.warn('Invalid language:', lang);
-    return;
-  }
-
   store.setState({ language: lang });
 }

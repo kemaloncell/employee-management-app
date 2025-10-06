@@ -1,3 +1,7 @@
+/**
+ * Pagination Component
+ */
+
 import { LitElement, html, css } from 'lit';
 import { cssVariables } from '../styles/shared-styles.js';
 
@@ -5,7 +9,7 @@ export class AppPagination extends LitElement {
   static properties = {
     currentPage: { type: Number },
     totalPages: { type: Number },
-    visibleRange: { type: Number }
+    visibleRange: { type: Number },
   };
 
   static styles = [
@@ -17,6 +21,8 @@ export class AppPagination extends LitElement {
 
       .pagination {
         margin-top: var(--spacing-md);
+        padding: 0;
+        background: transparent;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -44,7 +50,7 @@ export class AppPagination extends LitElement {
       .page-btn.active {
         border-radius: 50%;
         background: var(--color-primary);
-        color: white;
+        color: var(--color-white);
         font-weight: var(--font-weight-medium);
       }
 
@@ -59,11 +65,32 @@ export class AppPagination extends LitElement {
         display: flex;
         align-items: center;
         justify-content: center;
+        color: var(--color-text);
       }
 
+      /* Responsive */
       @media (max-width: 768px) {
+        .page-btn {
+          min-width: 36px;
+          height: 36px;
+          font-size: 0.875rem;
+        }
+
         .hide-mobile {
           display: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .page-btn {
+          min-width: 32px;
+          height: 32px;
+          font-size: 0.75rem;
+        }
+
+        .page-ellipsis {
+          min-width: 24px;
+          font-size: 0.75rem;
         }
       }
     `
@@ -120,6 +147,7 @@ export class AppPagination extends LitElement {
           class="page-btn"
           @click="${() => this._goToPage(this.currentPage - 1)}"
           ?disabled="${this.currentPage === 1}"
+          title="Previous"
         >
           ‹
         </button>
@@ -141,6 +169,7 @@ export class AppPagination extends LitElement {
           class="page-btn"
           @click="${() => this._goToPage(this.currentPage + 1)}"
           ?disabled="${this.currentPage === this.totalPages}"
+          title="Next"
         >
           ›
         </button>

@@ -1,58 +1,111 @@
 export const en = {
-  app: {
-    title: 'ING Employee Management'
-  },
+  // Navigation
   nav: {
     employees: 'Employees',
-    addNew: 'Add New Employee'
+    addNew: 'Add New',
   },
-  list: {
+
+  // Employee List Page
+  employeeList: {
     title: 'Employee List',
+    tableView: 'Table View',
+    listView: 'List View',
     search: 'Search employees...',
-    noEmployees: 'No employees found',
-    addNew: 'Add New Employee',
-    edit: 'Edit',
-    delete: 'Delete',
-    actions: 'Actions',
-    confirmDelete: 'Delete Employee',
-    confirmDeleteMessage: 'Are you sure you want to delete this employee? This action cannot be undone.'
+    noResults: 'No employees found',
+    noEmployees: 'No employees yet. Add your first employee!',
   },
-  form: {
-    addEmployee: 'Add New Employee',
-    editEmployee: 'Edit Employee',
-    backToList: 'Back to List',
+
+  // Employee Table Headers
+  table: {
+    select: 'Select',
     firstName: 'First Name',
     lastName: 'Last Name',
-    email: 'Email',
-    phone: 'Phone',
-    phoneHelper: 'Format: 532 123 45 67',
-    dateOfBirth: 'Date of Birth',
     dateOfEmployment: 'Date of Employment',
+    dateOfBirth: 'Date of Birth',
+    phone: 'Phone',
+    email: 'Email',
     department: 'Department',
     position: 'Position',
-    selectDepartment: 'Select department',
-    selectPosition: 'Select position',
-    save: 'Save',
-    update: 'Update',
-    cancel: 'Cancel'
+    actions: 'Actions',
   },
+
+  // Employee Form
+  form: {
+    addTitle: 'Add New Employee',
+    editTitle: 'Edit Employee',
+    editingEmployee: 'You are editing',
+    firstName: 'First Name',
+    lastName: 'Last Name',
+    dateOfEmployment: 'Date of Employment',
+    dateOfBirth: 'Date of Birth',
+    phone: 'Phone Number',
+    email: 'Email Address',
+    department: 'Department',
+    position: 'Position',
+    submit: 'Save',
+    cancel: 'Cancel',
+    selectDepartment: 'Select Department',
+    selectPosition: 'Select Position',
+  },
+
+  // Departments
   departments: {
-    Analytics: 'Analytics',
-    Tech: 'Tech'
+    analytics: 'Analytics',
+    tech: 'Tech',
   },
+
+  // Positions
   positions: {
-    Junior: 'Junior',
-    Medior: 'Medior',
-    Senior: 'Senior'
+    junior: 'Junior',
+    medior: 'Medior',
+    senior: 'Senior',
   },
+
+  // Actions
+  actions: {
+    edit: 'Edit',
+    delete: 'Delete',
+    save: 'Save',
+    cancel: 'Cancel',
+    confirm: 'Confirm',
+  },
+
+  // Confirmation Dialogs
+  confirmations: {
+    deleteTitle: 'Are you sure?',
+    deleteMessage: 'Selected employee record of {name} will be deleted',
+    updateTitle: 'Are you sure?',
+    updateMessage: 'Do you want to update this employee record?',
+    proceed: 'Proceed',
+    cancel: 'Cancel',
+  },
+
+  // Validation Messages
   validation: {
     required: 'This field is required',
     email: 'Please enter a valid email address',
-    emailUnique: 'This email is already in use',
-    phone: 'Phone format: 532 123 45 67',
+    phone: 'Please enter a valid phone number (e.g., 532 123 45 67)',
     date: 'Please enter a valid date',
-    dateOfBirthFuture: 'Birth date cannot be in the future',
+    unique: 'This {field} already exists',
+    dateOfBirthFuture: 'Date of birth cannot be in the future',
     dateOfBirthAge: 'Employee must be at least 18 years old',
-    dateOfEmploymentFuture: 'Employment date cannot be in the future'
-  }
+    dateOfEmploymentFuture: 'Employment date cannot be in the future',
+  },
+
+  // Pagination
+  pagination: {
+    page: 'Page',
+    of: 'of',
+    showing: 'Showing',
+    to: 'to',
+    totalRecords: 'total records',
+  },
+
+  // Messages
+  messages: {
+    employeeAdded: 'Employee added successfully',
+    employeeUpdated: 'Employee updated successfully',
+    employeeDeleted: 'Employee deleted successfully',
+    error: 'An error occurred',
+  },
 };

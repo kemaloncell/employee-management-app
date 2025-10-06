@@ -1,86 +1,122 @@
 import { LitElement, html } from 'lit';
-import { cssVariables } from './styles/shared-styles.js';
+import { Router } from '@vaadin/router';
+import { setLanguage } from './store/actions.js';
+import { getCurrentLanguage, setCurrentLanguage, t } from './locales/index.js';
+import './utils/seed-data.js';
 import { appStyles } from './styles/app-styles.js';
-import { router } from './router/index.js';
-import { t, setCurrentLanguage, getCurrentLanguage } from './locales/index.js';
+import { initRouter } from './router/index.js';
 
 class AppRoot extends LitElement {
   static properties = {
-    currentRoute: { type: Object },
-    currentLanguage: { type: String }
+    currentLang: { type: String },
+    currentPath: { type: String },
   };
 
-  static styles = [cssVariables, appStyles];
+  static styles = appStyles;
 
   constructor() {
     super();
-    this.currentRoute = null;
-    this.currentLanguage = getCurrentLanguage();
-    this.unsubscribeRouter = null;
+    this.currentLang = getCurrentLanguage();
+    this.currentPath = window.location.pathname;
   }
 
   connectedCallback() {
     super.connectedCallback();
 
-    router.init();
+    this._languageChangeHandler = (e) => {
+      this.currentLang = e.detail.lang;
+      setLanguage(e.detail.lang);
+    };
+    window.addEventListener('language-changed', this._languageChangeHandler);
 
-    this.unsubscribeRouter = router.subscribe(({ route }) => {
-      this.currentRoute = route;
-    });
+    this._routeChangeHandler = () => {
+      this.currentPath = window.location.pathname;
+    };
+    window.addEventListener('vaadin-router-location-changed', this._routeChangeHandler);
+  }
 
-    const { route } = router.getCurrentRoute();
-    this.currentRoute = route;
-
-    window.addEventListener('language-changed', (e) => {
-      this.currentLanguage = e.detail.lang;
-    });
+  firstUpdated() {
+    const outlet = this.shadowRoot.getElementById('outlet');
+    this.router = initRouter(outlet);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    if (this.unsubscribeRouter) {
-      this.unsubscribeRouter();
+
+    if (this._languageChangeHandler) {
+      window.removeEventListener('language-changed', this._languageChangeHandler);
     }
-    window.removeEventListener('language-changed', () => {});
+    if (this._routeChangeHandler) {
+      window.removeEventListener('vaadin-router-location-changed', this._routeChangeHandler);
+    }
+
+    if (this.router) {
+      this.router.setRoutes([]);
+    }
   }
 
-  _handleLanguageToggle(lang) {
-    setCurrentLanguage(lang);
+  _changeLanguage() {
+    const newLang = this.currentLang === 'en' ? 'tr' : 'en';
+    setCurrentLanguage(newLang);
+    this.currentLang = newLang;
+  }
+
+  _navigate(path) {
+    Router.go(path);
   }
 
   render() {
-    return html`
-      <div class="navbar">
-        <a href="/" class="navbar-brand" @click="${(e) => {e.preventDefault(); router.navigate('/');}}">
-          <h1>🏢 ${t('app.title')}</h1>
-        </a>
-        <div class="navbar-actions">
-          <button
-            class="lang-toggle ${this.currentLanguage === 'en' ? 'active' : ''}"
-            @click="${() => this._handleLanguageToggle('en')}"
-          >
-            EN
-          </button>
-          <button
-            class="lang-toggle ${this.currentLanguage === 'tr' ? 'active' : ''}"
-            @click="${() => this._handleLanguageToggle('tr')}"
-          >
-            TR
-          </button>
-        </div>
-      </div>
+    const isEmployeesPage = this.currentPath === '/employees' || this.currentPath === '/';
+    const isAddPage = this.currentPath.includes('/add') || this.currentPath.includes('/edit');
 
-      <div class="main-content">
-        ${this.currentRoute ? html`<${this.currentRoute.component}></${this.currentRoute.component}>` : ''}
+    return html`
+      <div class="app-container">
+        <header>
+          <div class="header-content">
+            <div class="logo">
+              <img src="/public/logo.svg" alt="ING Logo" width="40" height="40" />
+              <div class="logo-text">ING</div>
+            </div>
+            <div class="header-nav">
+              <a
+                href="/employees"
+                class="nav-link ${isEmployeesPage ? 'active' : ''}"
+                @click="${(e) => {
+                  e.preventDefault();
+                  if (!isEmployeesPage) this._navigate('/employees');
+                }}"
+              >
+                <img src="/public/users-icon.svg" alt="${t('nav.employees')}" class="icon" />
+                <span>${t('nav.employees')}</span>
+              </a>
+
+              <button
+                class="btn-add ${isAddPage ? 'active' : ''}"
+                @click="${() => {
+                  if (!isAddPage) this._navigate('/employees/add');
+                }}"
+              >
+                <img src="/public/plus-icon.svg" alt="${t('nav.addNew')}" class="icon" />
+                <span>${t('nav.addNew')}</span>
+              </button>
+            </div>
+
+            <div class="header-right">
+              <button
+                class="lang-btn"
+                @click="${this._changeLanguage}"
+                title="${this.currentLang === 'en' ? 'Switch to Turkish' : 'İngilizce\'ye geç'}"
+              >
+                ${this.currentLang === 'en' ? '🇹🇷' : '🇬🇧'}
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <main id="outlet"></main>
       </div>
     `;
   }
 }
 
 customElements.define('app-root', AppRoot);
-
-document.addEventListener('DOMContentLoaded', () => {
-  const appContainer = document.getElementById('app');
-  const appRoot = document.createElement('app-root');
-  appContainer.appendChild(appRoot);
-});

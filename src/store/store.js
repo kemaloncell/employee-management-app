@@ -1,8 +1,8 @@
-const STORAGE_KEY = 'employee_management_data';
+import { STORAGE_KEY, VIEW_MODES } from '../constants/index.js';
 
 const initialState = {
   employees: [],
-  viewMode: 'table',
+  viewMode: VIEW_MODES.TABLE,
   language: 'en',
 };
 
@@ -57,5 +57,4 @@ function createStore() {
 }
 
 export const store = createStore();
-
 export { createStore };
