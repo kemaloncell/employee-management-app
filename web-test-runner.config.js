@@ -91,10 +91,21 @@ export default {
   nodeResolve: {exportConditions: mode === 'dev' ? ['development'] : []},
   preserveSymlinks: true,
   browsers: commandLineBrowsers ?? Object.values(browsers),
+  coverage: true,
+  coverageConfig: {
+    threshold: {
+      statements: 85,
+      branches: 85,
+      functions: 85,
+      lines: 85,
+    },
+    include: ['src/**/*.js'],
+    exclude: ['test/**/*'],
+  },
   testFramework: {
     // https://mochajs.org/api/mocha
     config: {
-      ui: 'tdd',
+      ui: 'bdd',
       timeout: '60000',
     },
   },
