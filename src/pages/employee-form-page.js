@@ -8,6 +8,7 @@ import { getDepartmentOptions, getPositionOptions, PHONE_CONFIG } from '../const
 import '../components/confirm-dialog.js';
 import '../components/form-input.js';
 import '../components/form-select.js';
+import '../components/page-header.js';
 import { employeeFormStyles } from '../styles/employee-form-styles.js';
 
 export class EmployeeFormPage extends LitElement {
@@ -221,11 +222,11 @@ export class EmployeeFormPage extends LitElement {
 
   render() {
     return html`
-      <div class="page-header">
-        <h1 class="page-title">
-          ${this.isEditMode ? t('form.editTitle') : t('form.addTitle')}
-        </h1>
-      </div>
+      <page-header
+        .title="${this.isEditMode ? t('form.editTitle') : t('form.addTitle')}"
+        .showViewToggle="${false}"
+        .showSearch="${false}"
+      ></page-header>
 
       <div class="form-container">
         ${this.isEditMode && this.formData.firstName ? html`

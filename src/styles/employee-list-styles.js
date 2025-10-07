@@ -100,7 +100,7 @@ export const employeeListStyles = [
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
       max-width: 100%;
-      padding: 0 1rem;
+      padding: 0 0.5rem;
     }
 
     table {
@@ -110,7 +110,7 @@ export const employeeListStyles = [
     }
 
     th {
-      padding: 0.75rem 0.5rem;
+      padding: 0.5rem 0.5rem;
       text-align: left;
       font-weight: var(--font-weight-medium);
       color: var(--color-primary);
@@ -121,7 +121,7 @@ export const employeeListStyles = [
     }
 
     td {
-      padding: 0.75rem 0.5rem;
+      padding: 0.5rem 0.5rem;
       border-bottom: 1px solid var(--color-border-light);
       font-size: 0.8rem;
       color: var(--color-text-light);
@@ -162,14 +162,14 @@ export const employeeListStyles = [
     .list-container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: var(--spacing-lg);
+      gap: var(--spacing-md);
       max-width: 1200px;
       margin: 0 auto;
     }
 
     .list-item {
       background: var(--color-white);
-      padding: var(--spacing-lg);
+      padding: var(--spacing-md);
       border-radius: var(--radius-md);
       box-shadow: var(--shadow-md);
       border: 1px solid var(--color-border-light);
@@ -178,8 +178,8 @@ export const employeeListStyles = [
     .list-item-content {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: var(--spacing-md);
-      margin-bottom: var(--spacing-lg);
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
     }
 
     .list-item-field {
@@ -206,7 +206,7 @@ export const employeeListStyles = [
     }
 
     .pagination {
-      margin-top: var(--spacing-md);
+      margin-top: var(--spacing-sm);
       padding: 0;
       background: transparent;
       display: flex;

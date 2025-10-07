@@ -2,8 +2,8 @@
  * Form Input Component
  */
 
-import { LitElement, html } from 'lit';
-import { formStyles, cssVariables } from '../styles/shared-styles.js';
+import { LitElement, html, css } from 'lit';
+import { cssVariables } from '../styles/shared-styles.js';
 
 export class FormInput extends LitElement {
   static properties = {
@@ -18,7 +18,73 @@ export class FormInput extends LitElement {
     maxlength: { type: Number },
   };
 
-  static styles = [cssVariables, formStyles];
+  static styles = [
+    cssVariables,
+    css`
+      .form-field {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-label {
+        font-weight: var(--font-weight-medium);
+        color: var(--color-text);
+        margin-bottom: var(--spacing-sm);
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+      }
+
+      .form-label .required {
+        color: var(--color-error);
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        font-size: 0.9rem;
+        font-family: inherit;
+        background-color: var(--color-white);
+        box-sizing: border-box;
+        transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+        height: 38px;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px rgba(255, 98, 0, 0.1);
+      }
+
+      .form-input.error {
+        border-color: var(--color-error);
+      }
+
+      .form-input.error:focus {
+        box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+      }
+
+      input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(46%) sepia(89%) saturate(2881%) hue-rotate(360deg) brightness(102%) contrast(104%);
+        cursor: pointer;
+      }
+
+      .error-message {
+        color: var(--color-error);
+        font-size: var(--font-size-sm);
+        margin-top: var(--spacing-xs);
+        min-height: 1.25rem;
+      }
+
+      .helper-text {
+        font-size: var(--font-size-sm);
+        color: var(--color-text-light);
+        margin-top: var(--spacing-xs);
+      }
+    `
+  ];
 
   constructor() {
     super();

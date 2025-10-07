@@ -102,7 +102,7 @@ export class ActionButtons extends LitElement {
         @click="${this._handleEdit}"
         title="${this.editLabel}"
       >
-        <img src="/public/edit-icon.svg" alt="${this.editLabel}" />
+        <img src="/assets/edit-icon.svg" alt="${this.editLabel}" />
         ${this.mode === 'icon-text' ? this.editLabel : ''}
       </button>
       <button
@@ -110,7 +110,7 @@ export class ActionButtons extends LitElement {
         @click="${this._handleDelete}"
         title="${this.deleteLabel}"
       >
-        <img src="/public/delete-icon.svg" alt="${this.deleteLabel}" />
+        <img src="/assets/delete-icon.svg" alt="${this.deleteLabel}" />
         ${this.mode === 'icon-text' ? this.deleteLabel : ''}
       </button>
     `;

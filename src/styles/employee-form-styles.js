@@ -15,22 +15,15 @@ export const employeeFormStyles = [
       display: block;
     }
 
-    .page-header {
-      max-width: 1200px;
-      margin: 0 auto var(--spacing-lg);
-    }
-
     .edit-subtitle {
       color: var(--color-text);
       font-size: var(--font-size-base);
-      margin: 0 0 var(--spacing-lg) -1rem;
+      margin: 0 0 var(--spacing-lg) 0;
     }
 
     .form-container {
-      max-width: 1200px;
-      margin: 0 auto;
       background: var(--color-white);
-      padding: 3rem 4rem;
+      padding: 2rem 3rem;
       border-radius: var(--radius-md);
       box-shadow: var(--shadow-md);
     }
@@ -38,15 +31,15 @@ export const employeeFormStyles = [
     .form-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 3.5rem 3.5rem;
-      margin-bottom: var(--spacing-xl);
+      gap: 2rem 2rem;
+      margin-bottom: var(--spacing-lg);
     }
 
     .form-actions {
       display: flex;
       gap: var(--spacing-md);
       justify-content: center;
-      padding-top: var(--spacing-lg);
+      padding-top: var(--spacing-md);
     }
 
     .form-actions .btn {
@@ -83,10 +76,6 @@ export const employeeFormStyles = [
     }
 
     @media (max-width: 480px) {
-      .page-title {
-        font-size: 1.25rem;
-      }
-
       .form-container {
         padding: var(--spacing-md);
       }

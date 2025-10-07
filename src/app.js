@@ -74,7 +74,7 @@ class AppRoot extends LitElement {
         <header>
           <div class="header-content">
             <div class="logo">
-              <img src="/public/logo.svg" alt="ING Logo" width="40" height="40" />
+              <img src="/assets/logo.svg" alt="ING Logo" width="40" height="40" />
               <div class="logo-text">ING</div>
             </div>
             <div class="header-nav">
@@ -86,7 +86,7 @@ class AppRoot extends LitElement {
                   if (!isEmployeesPage) this._navigate('/employees');
                 }}"
               >
-                <img src="/public/users-icon.svg" alt="${t('nav.employees')}" class="icon" />
+                <img src="/assets/users-icon.svg" alt="${t('nav.employees')}" class="icon" />
                 <span>${t('nav.employees')}</span>
               </a>
 
@@ -96,7 +96,7 @@ class AppRoot extends LitElement {
                   if (!isAddPage) this._navigate('/employees/add');
                 }}"
               >
-                <img src="/public/plus-icon.svg" alt="${t('nav.addNew')}" class="icon" />
+                <img src="/assets/plus-icon.svg" alt="${t('nav.addNew')}" class="icon" />
                 <span>${t('nav.addNew')}</span>
               </button>
             </div>

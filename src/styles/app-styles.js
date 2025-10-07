@@ -118,7 +118,10 @@ export const appStyles = [
 
   main {
     flex: 1;
-    padding: var(--spacing-xl) var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-md);
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
   }
 
   /* Responsive */
@@ -152,7 +155,7 @@ export const appStyles = [
     }
 
     main {
-      padding: var(--spacing-md);
+      padding: var(--spacing-sm);
     }
   }
 

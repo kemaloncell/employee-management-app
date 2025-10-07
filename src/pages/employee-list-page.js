@@ -9,6 +9,7 @@ import { employeeListStyles } from '../styles/employee-list-styles.js';
 import '../components/confirm-dialog.js';
 import '../components/action-buttons.js';
 import '../components/app-pagination.js';
+import '../components/page-header.js';
 
 export class EmployeeListPage extends LitElement {
   static properties = {
@@ -68,7 +69,7 @@ export class EmployeeListPage extends LitElement {
   }
 
   _handleSearch(e) {
-    this.searchTerm = e.target.value;
+    this.searchTerm = e.detail.searchTerm;
     this.currentPage = 1;
     this._filterEmployees();
   }
@@ -277,38 +278,15 @@ export class EmployeeListPage extends LitElement {
 
   render() {
     return html`
-      <div class="page-header">
-        <div class="title-row">
-          <h1 class="page-title">${t('employeeList.title')}</h1>
-
-          <div class="view-toggle">
-            <button
-              class="view-btn ${this.viewMode === VIEW_MODES.TABLE ? 'active' : ''}"
-              @click="${() => this._toggleViewMode(VIEW_MODES.TABLE)}"
-              title="${t('employeeList.tableView')}"
-            >
-              ☰
-            </button>
-            <button
-              class="view-btn ${this.viewMode === VIEW_MODES.LIST ? 'active' : ''}"
-              @click="${() => this._toggleViewMode(VIEW_MODES.LIST)}"
-              title="${t('employeeList.listView')}"
-            >
-              ▦
-            </button>
-          </div>
-        </div>
-
-        <div class="search-bar">
-          <input
-            type="text"
-            class="search-input"
-            placeholder="${t('employeeList.search')}"
-            .value="${this.searchTerm}"
-            @input="${this._handleSearch}"
-          />
-        </div>
-      </div>
+      <page-header
+        .title="${t('employeeList.title')}"
+        .showViewToggle="${true}"
+        .viewMode="${this.viewMode}"
+        .showSearch="${true}"
+        .searchTerm="${this.searchTerm}"
+        @view-mode-change="${(e) => this._toggleViewMode(e.detail.mode)}"
+        @search="${this._handleSearch}"
+      ></page-header>
 
       ${this.viewMode === VIEW_MODES.TABLE ? this._renderTableView() : this._renderListView()}
 
